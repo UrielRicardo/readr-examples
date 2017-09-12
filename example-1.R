@@ -27,8 +27,8 @@ dados <- read_fwf(
 # que é usada pelas citadas acima
 dados <- read_delim(readr_example("mtcars.csv"), delim = ",")
 
-# Podemos inferir tipos para as colunas.
-# Isso pode ser feito em qualquer uma das funções de leitura
+# Podemos inferir tipos e nomes para as colunas.
+# Isso pode ser feito em qualquer uma das funções de leitura, exceto a FWF, por possuir sintaxe diferente
 dados <- read_csv(
   readr_example("mtcars.csv"), 
   col_types = cols(
@@ -37,7 +37,7 @@ dados <- read_csv(
     disp = col_double(),
     hp = col_integer(),
     drat = col_double(),
-    vs = col_integer(),
+    vs = col_double(),
     wt = col_double(),
     qsec = col_double(),
     am = col_integer(),
@@ -65,4 +65,39 @@ dados <- read_csv(
     col_integer(),
     col_integer()
   )
+)
+
+# Ainda assim, podemos definir nomes para as colunas
+dados <- read_csv(
+  readr_example("mtcars.csv"),
+  col_names = c("mpg", "cyl", "disp", "hp", "drat", "vs", "wt", "qsec", "am", "gear", "carb"), # Define nome de cada coluna
+  skip = 1, # Pula a primeira linha
+  col_types = cols(
+    col_double(),   # Infere tipo das colunas, em um segundo formato
+    col_integer(),  # col_type() ( na ordem em que é lido )
+    col_double(),
+    col_integer(),
+    col_double(),
+    col_double(),
+    col_double(),
+    col_double(),
+    col_integer(),
+    col_integer(),
+    col_integer()
+  )
+)
+
+# Podemos também ler logs, como por exemplo, do apache
+read_log(
+  readr_example("example.log"), 
+  col_types = cols(
+    ip = col_character(),
+    remoteLogName = col_skip(), # Podemos também pular alguma coluna
+    userAgent = col_character(),
+    data = col_datetime(format = "%d/%b/%Y:%H:%M:%S %z"),
+    action = col_character(),
+    codResposta = col_integer(),
+    lengthResposta = col_integer()
+  ),
+  col_names = c("ip", "remoteLogName", "userAgent", "data", "action", "codResposta", "lengthResposta")
 )
