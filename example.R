@@ -1,9 +1,8 @@
-# Instala readr e tidyverse, pacote pai do readr
-install.packages("tidyverse")
+# Instala readr
 install.packages("readr")
 
-# Importa tidyverse
-library(tidyverse)
+# Importa biblioteca
+library(readr)
 
 # Função que retorna um arquivo de exemplo do R
 readr_example("mtcars.csv")
@@ -15,7 +14,6 @@ dados <- read_csv(readr_example("mtcars.csv"))
 # que o pacote irá descompactar/baixar e ler
 dados <- read_csv(readr_example("mtcars.csv.zip"))
 dados <- read_csv("https://raw.githubusercontent.com/tidyverse/readr/master/inst/extdata/mtcars.csv")
-
 
 # Lê CSV2 (separado por ponto-e-vírgula)
 dados <- read_csv2("x;y\n1;1\n2;2\n3;3")
@@ -96,7 +94,7 @@ dados <- read_csv(
 )
 
 # Podemos também ler logs, como por exemplo, do apache
-read_log(
+dados <- read_log(
   readr_example("example.log"), 
   col_types = cols(
     ip = col_character(),
