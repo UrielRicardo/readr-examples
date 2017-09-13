@@ -1,4 +1,8 @@
-# Importa tidyverse, pacote pai do readr
+# Instala readr e tidyverse, pacote pai do readr
+install.packages("tidyverse")
+install.packages("readr")
+
+# Importa tidyverse
 library(tidyverse)
 
 # Função que retorna um arquivo de exemplo do R
@@ -10,6 +14,8 @@ dados <- read_csv(readr_example("mtcars.csv"))
 # Conseguimos também colocar URL's e arquivos compactados em diversos formatos,
 # que o pacote irá descompactar/baixar e ler
 dados <- read_csv(readr_example("mtcars.csv.zip"))
+dados <- read_csv("https://raw.githubusercontent.com/tidyverse/readr/master/inst/extdata/mtcars.csv")
+
 
 # Lê CSV2 (separado por ponto-e-vírgula)
 dados <- read_csv2("x;y\n1;1\n2;2\n3;3")
@@ -28,6 +34,8 @@ dados <- read_fwf(
 dados <- read_delim(readr_example("mtcars.csv"), delim = ",")
 
 # Podemos inferir tipos e nomes para as colunas.
+# Caso não definirmos, a função irá analizar as primeiras 1000 linhas para decidir o tipo de cada coluna, e fará automaticamente.
+# Esta forma automática é boa para datasets pequenos, visto que o processamento ocorrido é pequeno
 # Isso pode ser feito em qualquer uma das funções de leitura, exceto a FWF, por possuir sintaxe diferente
 dados <- read_csv(
   readr_example("mtcars.csv"), 
