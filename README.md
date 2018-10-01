@@ -1,1 +1,1 @@
-# R package "readr" examples
+# R package "readr" examples.
